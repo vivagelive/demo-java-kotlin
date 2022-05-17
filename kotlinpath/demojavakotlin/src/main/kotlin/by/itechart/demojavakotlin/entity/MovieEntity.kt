@@ -10,7 +10,7 @@ data class MovieEntity(
         @Column(name = "id")
         val id: UUID? = null,
 
-        @Column(name = "text", nullable = false, unique = true)
+        @Column(name = "name", nullable = false, unique = true)
         val name: String? = null,
 
         @Column(name = "director", nullable = false)
