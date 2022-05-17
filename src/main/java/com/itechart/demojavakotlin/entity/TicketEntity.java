@@ -1,18 +1,20 @@
 package com.itechart.demojavakotlin.entity;
 
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
+@Builder
+@NoArgsConstructor
 @Table(name = "ticket")
 public class TicketEntity {
 
     @Id
     @Column(name = "id", insertable = false, updatable = false)
     private UUID id;
-
-    @Column(name = "name", nullable = false, unique = true)
-    private String name;
 
     @Column(name = "price", nullable = false)
     private double price;

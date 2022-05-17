@@ -35,4 +35,9 @@ public class MovieServiceImpl implements MovieService {
     public void deleteMovie(final UUID id) {
         movieRepository.deleteById(id);
     }
+
+    @Override
+    public MovieEntity getMovieByName(final String movieName) {
+        return movieRepository.findByName(movieName);
+    }
 }

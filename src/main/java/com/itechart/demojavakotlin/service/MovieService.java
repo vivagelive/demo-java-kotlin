@@ -13,4 +13,6 @@ public interface MovieService {
     MovieEntity addMovie(final MovieRequest requestMovie);
 
     void deleteMovie(final UUID id);
+
+    MovieEntity getMovieByName(final String movieName);
 }
