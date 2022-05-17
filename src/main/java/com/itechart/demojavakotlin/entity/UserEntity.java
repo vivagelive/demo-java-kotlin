@@ -1,6 +1,6 @@
 package com.itechart.demojavakotlin.entity;
+
 import lombok.NoArgsConstructor;
-import net.bytebuddy.agent.builder.AgentBuilder;
 
 import javax.persistence.*;
 import java.util.List;
