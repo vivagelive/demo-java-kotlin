@@ -18,7 +18,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RequestMapping("/movies")
 public class MovieController {
 
-    private MovieService movieService;
+    private final MovieService movieService;
 
     @GetMapping("/all")
     public ResponseEntity<List<MovieEntity>> getMovies() {
@@ -33,6 +33,6 @@ public class MovieController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMovie(@PathVariable final UUID id) {
         movieService.deleteMovie(id);
-        return new ResponseEntity(NO_CONTENT);
+        return new ResponseEntity<>(NO_CONTENT);
     }
 }

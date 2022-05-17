@@ -6,15 +6,17 @@ import com.itechart.demojavakotlin.model.TicketsRequest;
 import com.itechart.demojavakotlin.repository.TicketRepository;
 import com.itechart.demojavakotlin.service.MovieService;
 import com.itechart.demojavakotlin.service.TicketService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class TicketServiceImpl implements TicketService {
 
-    private TicketRepository ticketRepository;
-    private MovieService movieService;
+    private final TicketRepository ticketRepository;
+    private final MovieService movieService;
 
     @Override
     public List<TicketEntity> buyTicket(final int quantity) {
