@@ -14,7 +14,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class MovieServiceImpl implements MovieService {
 
-    private MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
 
     @Override
     public List<MovieEntity> getAll() {

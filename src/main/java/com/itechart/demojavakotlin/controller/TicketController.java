@@ -3,6 +3,7 @@ package com.itechart.demojavakotlin.controller;
 import com.itechart.demojavakotlin.entity.TicketEntity;
 import com.itechart.demojavakotlin.model.TicketsRequest;
 import com.itechart.demojavakotlin.service.TicketService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +13,11 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/tickets")
 public class TicketController {
 
-    private TicketService ticketService;
+    private final TicketService ticketService;
 
     @PutMapping("/buy")
     public ResponseEntity<List<TicketEntity>> buyTickets(@RequestBody final int quantity) {
