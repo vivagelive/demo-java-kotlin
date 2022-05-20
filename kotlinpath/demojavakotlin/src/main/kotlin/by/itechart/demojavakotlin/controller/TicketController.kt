@@ -21,7 +21,7 @@ class TicketController(private val ticketService: TicketService) {
     }
 
     @DeleteMapping("/{movieName}")
-    fun removeTicketsByMovieName(@PathVariable movieName: String?): ResponseEntity<Void?>? {
+    fun removeTicketsByMovieName(@PathVariable movieName: String): ResponseEntity<Void?>? {
         ticketService.removeTicketsByMovieName(movieName)
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }

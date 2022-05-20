@@ -11,11 +11,11 @@ import java.util.*
 class MovieServiceImpl(private val movieRepository: MovieRepository) : MovieService {
     override fun getAll(): List<MovieEntity> = movieRepository.findAll()
 
-    override fun addMovie(requestMovie: MovieRequest): MovieEntity? = movieRepository.saveAndFlush(
-            MovieEntity(name = requestMovie.name, director = requestMovie.director, description = requestMovie.description)
+    override fun addMovie(requestMovie: MovieRequest): MovieEntity = movieRepository.saveAndFlush(
+        MovieEntity(name = requestMovie.name, director = requestMovie.director, description = requestMovie.description)
     )
 
     override fun deleteMovie(id: UUID) = movieRepository.deleteById(id)
 
-    override fun getMovieByName(movieName: String?): MovieEntity = movieRepository.findByName(movieName)
+    override fun getMovieByName(movieName: String): MovieEntity = movieRepository.findByName(movieName)
 }

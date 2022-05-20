@@ -7,9 +7,9 @@ import java.util.*
 interface MovieService {
     fun getAll(): List<MovieEntity>
 
-    fun addMovie(requestMovie: MovieRequest): MovieEntity?
+    fun addMovie(requestMovie: MovieRequest): MovieEntity
 
     fun deleteMovie(id: UUID)
 
-    fun getMovieByName(movieName: String?): MovieEntity?
+    fun getMovieByName(movieName: String): MovieEntity?
 }
