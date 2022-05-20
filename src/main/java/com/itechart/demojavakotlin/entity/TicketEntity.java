@@ -1,9 +1,17 @@
 package com.itechart.demojavakotlin.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "ticket")
 public class TicketEntity {
 
@@ -11,11 +19,8 @@ public class TicketEntity {
     @Column(name = "id", insertable = false, updatable = false)
     private UUID id;
 
-    @Column(name = "name", nullable = false, unique = true)
-    private String name;
-
     @Column(name = "price", nullable = false)
-    private double price;
+    private BigDecimal price;
 
     @Column(name = "quantity")
     private int quantity;
