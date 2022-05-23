@@ -8,15 +8,15 @@ import javax.persistence.*
 data class MovieEntity(
         @Id
         @Column(name = "id")
-        val id: UUID? = null,
+        val id: UUID = UUID.randomUUID(),
 
         @Column(name = "name", nullable = false, unique = true)
-        val name: String? = null,
+        val name: String,
 
         @Column(name = "director", nullable = false)
-        val director: String? = null,
+        val director: String,
 
-        @Column(name = "description", nullable = false)
+        @Column(name = "description")
         val description: String? = null,
 
         @OneToMany(mappedBy = "movieId", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])

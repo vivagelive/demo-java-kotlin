@@ -25,7 +25,7 @@ public class MovieEntity {
     @Column(name = "director", nullable = false)
     private String director;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
     @OneToMany(mappedBy = "movieId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

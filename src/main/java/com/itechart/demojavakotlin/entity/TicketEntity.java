@@ -26,7 +26,7 @@ public class TicketEntity {
     private int quantity;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private UserEntity userId;
 
     @ManyToOne

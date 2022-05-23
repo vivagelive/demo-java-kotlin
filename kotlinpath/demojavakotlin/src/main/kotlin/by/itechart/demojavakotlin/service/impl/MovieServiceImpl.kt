@@ -12,7 +12,11 @@ class MovieServiceImpl(private val movieRepository: MovieRepository) : MovieServ
     override fun getAll(): List<MovieEntity> = movieRepository.findAll()
 
     override fun addMovie(requestMovie: MovieRequest): MovieEntity = movieRepository.saveAndFlush(
-        MovieEntity(name = requestMovie.name, director = requestMovie.director, description = requestMovie.description)
+        MovieEntity(
+            name = requestMovie.name,
+            director = requestMovie.director,
+            description = requestMovie.description
+        )
     )
 
     override fun deleteMovie(id: UUID) = movieRepository.deleteById(id)

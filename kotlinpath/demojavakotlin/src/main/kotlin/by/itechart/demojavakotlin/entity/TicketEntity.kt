@@ -9,7 +9,7 @@ import javax.persistence.*
 data class TicketEntity(
         @Id
         @Column(name = "id", insertable = false, updatable = false)
-        private val id: UUID? = null,
+        private val id: UUID = UUID.randomUUID(),
 
         @Column(name = "price", nullable = false)
         private val price: BigDecimal = BigDecimal(0),
@@ -18,10 +18,10 @@ data class TicketEntity(
         private val quantity: Int = 0,
 
         @ManyToOne
-        @JoinColumn(name = "user_id", nullable = false)
+        @JoinColumn(name = "user_id")
         private val userId: UserEntity? = null,
 
         @ManyToOne
         @JoinColumn(name = "movie_id", nullable = false)
-        private val movieId: MovieEntity? = null
+        private val movieId: MovieEntity
 )
