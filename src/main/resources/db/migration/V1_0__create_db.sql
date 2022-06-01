@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS public."movie"
     id          uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     name        text NOT NULL UNIQUE,
     director    text NOT NULL,
-    description text NOT NULL
+    description text
 );
 
 CREATE TABLE IF NOT EXISTS public."users"

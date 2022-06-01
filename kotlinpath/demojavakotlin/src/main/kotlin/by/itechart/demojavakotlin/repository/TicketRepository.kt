@@ -11,7 +11,7 @@ import java.util.*
 interface TicketRepository : JpaRepository<TicketEntity, UUID> {
     @Modifying
     @Query(value = "UPDATE ticket SET quantity = quantity - :requestQuantity", nativeQuery = true)
-    fun buyTicket(@Param("requestQuantity") quantity: Int): List<TicketEntity?>?
+    fun buyTicket(@Param("requestQuantity") quantity: Int): List<TicketEntity>
 
     @Modifying
     fun deleteByMovieId(movieId: MovieEntity?)

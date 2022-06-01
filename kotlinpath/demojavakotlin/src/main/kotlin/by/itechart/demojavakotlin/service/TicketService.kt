@@ -5,9 +5,9 @@ import by.itechart.demojavakotlin.model.TicketRequest
 
 interface TicketService {
 
-    fun buyTicket(quantity: Int): List<TicketEntity?>?
+    fun buyTicket(quantity: Int): List<TicketEntity>
 
-    fun addTicketsToMovie(ticketsRequest: TicketRequest): TicketEntity?
+    fun addTicketsToMovie(ticketsRequest: TicketRequest): TicketEntity
 
-    fun removeTicketsByMovieName(movieName: String?)
+    fun removeTicketsByMovieName(movieName: String)
 }

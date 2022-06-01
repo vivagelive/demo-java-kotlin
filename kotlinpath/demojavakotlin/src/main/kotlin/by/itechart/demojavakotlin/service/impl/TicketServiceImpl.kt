@@ -9,16 +9,17 @@ import org.springframework.stereotype.Service
 
 @Service
 class TicketServiceImpl(
-        private val ticketRepository: TicketRepository,
-        private val movieService: MovieService) : TicketService {
+    private val ticketRepository: TicketRepository,
+    private val movieService: MovieService
+) : TicketService {
 
-    override fun buyTicket(quantity: Int): List<TicketEntity?>? = ticketRepository.buyTicket(quantity)
+    override fun buyTicket(quantity: Int): List<TicketEntity> = ticketRepository.buyTicket(quantity)
 
     override fun addTicketsToMovie(ticketsRequest: TicketRequest): TicketEntity = ticketRepository.saveAndFlush(
-            TicketEntity(quantity = ticketsRequest.quantity, price = ticketsRequest.price)
+        TicketEntity(quantity = ticketsRequest.quantity, price = ticketsRequest.price, movieId = ticketsRequest.movie)
     )
 
-    override fun removeTicketsByMovieName(movieName: String?) {
+    override fun removeTicketsByMovieName(movieName: String) {
         movieService.getMovieByName(movieName)?.let {
             ticketRepository.deleteByMovieId(it)
         }
