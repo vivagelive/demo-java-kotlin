@@ -8,13 +8,13 @@ import javax.persistence.*
 @Table(name = "users")
 data class UserEntity(
         @Id @Column(name = "id", insertable = false, updatable = false)
-        private var id: UUID? = null,
+        private var id: UUID = UUID.randomUUID(),
 
         @Column(name = "money")
-        private val money: BigDecimal = BigDecimal(0),
+        private val money: BigDecimal? = BigDecimal(0),
 
         @Column(name = "name", nullable = false)
-        private val name: String? = null,
+        private val name: String,
 
         @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
         private val tickets: List<TicketEntity>? = null
