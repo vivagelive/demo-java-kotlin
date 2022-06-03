@@ -1,14 +1,15 @@
 package com.itechart.demojavakotlin.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,6 +17,7 @@ import java.util.UUID;
 public class TicketEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", insertable = false, updatable = false)
     private UUID id;
 
@@ -27,9 +29,11 @@ public class TicketEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private UserEntity userId;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "movie_id", nullable = false)
     private MovieEntity movieId;
 }
