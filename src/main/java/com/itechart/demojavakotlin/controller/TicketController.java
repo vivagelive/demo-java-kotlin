@@ -7,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -19,9 +17,9 @@ public class TicketController {
 
     private final TicketService ticketService;
 
-    @PutMapping("/buy")
-    public ResponseEntity<List<TicketEntity>> buyTickets(@RequestBody final int quantity) {
-        return new ResponseEntity<>(ticketService.buyTicket(quantity), OK);
+    @PostMapping("/buy")
+    public ResponseEntity<TicketEntity> buyTickets(@RequestParam final int quantity, @RequestParam final String movieName) {
+        return new ResponseEntity<>(ticketService.buyTicket(quantity, movieName), OK);
     }
 
     @PostMapping

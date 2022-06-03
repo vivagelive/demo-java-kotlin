@@ -26,7 +26,7 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity<MovieEntity> addMovie(final MovieRequest requestMovie) {
+    public ResponseEntity<MovieEntity> addMovie(@RequestBody final MovieRequest requestMovie) {
         return new ResponseEntity<>(movieService.addMovie(requestMovie), OK);
     }
 

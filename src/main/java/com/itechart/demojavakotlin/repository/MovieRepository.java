@@ -4,10 +4,11 @@ import com.itechart.demojavakotlin.entity.MovieEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface MovieRepository extends JpaRepository<MovieEntity, UUID> {
 
-    MovieEntity findByName(final String movieName);
+    Optional<MovieEntity> findByName(final String movieName);
 }
