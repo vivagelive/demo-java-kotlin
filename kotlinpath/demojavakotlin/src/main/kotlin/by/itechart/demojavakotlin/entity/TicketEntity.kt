@@ -1,5 +1,6 @@
 package by.itechart.demojavakotlin.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import java.math.BigDecimal
 import java.util.*
 import javax.persistence.*
@@ -9,6 +10,7 @@ import javax.persistence.*
 data class TicketEntity(
         @Id
         @Column(name = "id", insertable = false, updatable = false)
+        @GeneratedValue
         private val id: UUID = UUID.randomUUID(),
 
         @Column(name = "price", nullable = false)
@@ -19,9 +21,11 @@ data class TicketEntity(
 
         @ManyToOne
         @JoinColumn(name = "user_id")
+        @JsonIgnore
         private val userId: UserEntity? = null,
 
         @ManyToOne
         @JoinColumn(name = "movie_id", nullable = false)
+        @JsonIgnore
         private val movieId: MovieEntity
 )

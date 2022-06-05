@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/tickets")
 class TicketController(private val ticketService: TicketService) {
-    @PutMapping("/buy")
-    fun buyTickets(@RequestBody quantity: Int): ResponseEntity<List<TicketEntity>> {
+    @PostMapping("/buy")
+    fun buyTickets(@RequestParam quantity: Int): ResponseEntity<List<TicketEntity>> {
         return ResponseEntity<List<TicketEntity>>(ticketService.buyTicket(quantity), HttpStatus.OK)
     }
 
