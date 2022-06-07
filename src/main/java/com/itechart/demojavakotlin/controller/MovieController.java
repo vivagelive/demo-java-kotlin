@@ -2,6 +2,7 @@ package com.itechart.demojavakotlin.controller;
 
 import com.itechart.demojavakotlin.entity.MovieEntity;
 import com.itechart.demojavakotlin.model.MovieRequest;
+import com.itechart.demojavakotlin.model.TicketsRequest;
 import com.itechart.demojavakotlin.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,18 @@ public class MovieController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMovie(@PathVariable final UUID id) {
         movieService.deleteMovie(id);
+        return new ResponseEntity<>(NO_CONTENT);
+    }
+
+    @PutMapping("/add-tickets")
+    public ResponseEntity<Void> addTicketsToMovie(@RequestBody final TicketsRequest ticketsRequest) {
+        movieService.addTicketsToMovie(ticketsRequest);
+        return new ResponseEntity<>(OK);
+    }
+
+    @PutMapping("/remove-tickets")
+    public ResponseEntity<Void> removeTicketsByMovieName(@RequestBody final TicketsRequest ticketsRequest) {
+        movieService.removeTicketsFromMovie(ticketsRequest);
         return new ResponseEntity<>(NO_CONTENT);
     }
 }

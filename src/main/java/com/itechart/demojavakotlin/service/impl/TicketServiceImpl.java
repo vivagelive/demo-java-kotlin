@@ -4,8 +4,6 @@ import com.itechart.demojavakotlin.entity.MovieEntity;
 import com.itechart.demojavakotlin.entity.TicketEntity;
 import com.itechart.demojavakotlin.entity.UserEntity;
 import com.itechart.demojavakotlin.exceptions.UnprocessableException;
-import com.itechart.demojavakotlin.model.TicketsRequest;
-import com.itechart.demojavakotlin.model.UserRequest;
 import com.itechart.demojavakotlin.repository.TicketRepository;
 import com.itechart.demojavakotlin.service.MovieService;
 import com.itechart.demojavakotlin.service.TicketService;
@@ -16,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 import static java.math.BigDecimal.valueOf;
@@ -34,7 +30,7 @@ public class TicketServiceImpl implements TicketService {
     @Transactional
     public TicketEntity buyTicket(final int quantity, final String movieName) {
         final MovieEntity foundMovie = getMovieByName(movieName);
-        //todo 1.compare total tickets quantity in movie table with requested tickets
+        //todo #DONE 1.compare total tickets quantity in movie table with requested tickets
         if (foundMovie.getTicketsQuantity() < quantity) {
             throw new UnprocessableException(format("Requested tickets number greater than %d", foundMovie.getTicketsQuantity()));
         }
@@ -47,10 +43,14 @@ public class TicketServiceImpl implements TicketService {
                 foundTickets.stream().map(TicketEntity::getQuantity).mapToInt(Integer::intValue).sum();
 
         final BigDecimal discount = valueOf((purchasedTickets < 10) ? 1 : 0.9);
-        final BigDecimal finalPrice = foundMovie.getTicketPrice().multiply(discount);
+        final BigDecimal finalPrice = valueOf(quantity).multiply(foundMovie.getTicketPrice().multiply(discount));
 
-        //todo 3. change users money
+        //todo #DONE 3. change users money
         userService.payTicket(buyer.getId(), finalPrice);
+
+        //todo #DONE 4. change total tickets quantity
+        final int updatedTickets = foundMovie.getTicketsQuantity() - quantity;
+        movieService.changeTotalTicketQuantity(updatedTickets, foundMovie.getId(), foundMovie.getTicketPrice());
 
         return ticketRepository.saveAndFlush(
                 TicketEntity.builder()
@@ -61,26 +61,6 @@ public class TicketServiceImpl implements TicketService {
                         .build());
     }
 
-    @Override
-    @Transactional
-    public TicketEntity addTicketsToMovie(final TicketsRequest ticketsRequest) {
-        final MovieEntity foundMovie = getMovieByName(ticketsRequest.getMovieName());
-        //todo change total number of tickets in movie
-
-        return ticketRepository.saveAndFlush(
-                TicketEntity.builder()
-                        .price(ticketsRequest.getPrice())
-                        .quantity(ticketsRequest.getQuantity())
-                        .build());
-    }
-
-    @Override
-    @Transactional
-    public void removeTicketsByMovieName(final String movieName) {
-        final MovieEntity foundMovie = getMovieByName(movieName);
-
-        ticketRepository.deleteByMovieId(foundMovie);
-    }
 
     private MovieEntity getMovieByName(final String movieName) {
         return movieService.getMovieByName(movieName);

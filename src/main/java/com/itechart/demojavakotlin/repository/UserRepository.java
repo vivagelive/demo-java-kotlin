@@ -16,6 +16,9 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
     Optional<UserEntity> findByName(final String name);
 
+    @Query(value = "SELECT money FROM users WHERE id = :id", nativeQuery = true)
+    BigDecimal getUsersMoney(@Param("id") final UUID id);
+
     @Modifying
     @Query(value = "UPDATE users SET money = money - :bill WHERE id = :id", nativeQuery = true)
     void payTicket(@Param("id") final UUID id, @Param("bill") final BigDecimal bill);
