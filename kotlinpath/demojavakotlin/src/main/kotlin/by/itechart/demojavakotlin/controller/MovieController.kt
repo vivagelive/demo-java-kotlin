@@ -16,8 +16,8 @@ class MovieController(private val movieService: MovieService) {
     fun getMovies(): ResponseEntity<List<MovieEntity>> = ResponseEntity(movieService.getAll(), OK)
 
     @PostMapping
-    fun addMovie(requestMovie: MovieRequest): ResponseEntity<MovieEntity> =
-            ResponseEntity(movieService.addMovie(requestMovie), OK)
+    fun addMovie(@RequestBody requestMovie: MovieRequest): ResponseEntity<MovieEntity> =
+        ResponseEntity(movieService.addMovie(requestMovie), OK)
 
     @DeleteMapping("/{id}")
     fun deleteMovie(@PathVariable id: UUID): ResponseEntity<Void> {

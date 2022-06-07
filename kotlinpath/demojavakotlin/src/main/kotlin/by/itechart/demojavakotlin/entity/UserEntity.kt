@@ -7,7 +7,9 @@ import javax.persistence.*
 @Entity
 @Table(name = "users")
 data class UserEntity(
-        @Id @Column(name = "id", insertable = false, updatable = false)
+        @Id
+        @Column(name = "id", insertable = false, updatable = false)
+        @GeneratedValue
         private var id: UUID = UUID.randomUUID(),
 
         @Column(name = "money")
