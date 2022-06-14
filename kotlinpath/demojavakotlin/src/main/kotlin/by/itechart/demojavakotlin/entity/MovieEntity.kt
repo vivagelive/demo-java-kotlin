@@ -23,10 +23,10 @@ data class MovieEntity(
         val description: String? = null,
 
         @Column(name = "tickets_quantity")
-        private var ticketsQuantity: Int = 0,
+        val ticketsQuantity: Int = 0,
 
         @Column(name = "ticket_price")
-        private val ticketPrice: BigDecimal = BigDecimal(0),
+        val ticketPrice: BigDecimal = BigDecimal(0),
 
         @JsonIgnore
         @OneToMany(mappedBy = "movieId", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
