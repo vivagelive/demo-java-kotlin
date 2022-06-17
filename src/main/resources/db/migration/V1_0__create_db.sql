@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS public."ticket"
 INSERT INTO users (money, name)
 VALUES (300, 'Homer Simpson');
 
-INSERT INTO movie (name, director, description)
-VALUES ('Batman', 'Tim Burton', 'The Batman is a 2022 American superhero film based on the DC Comics character');
+INSERT INTO movie (name, director, description, tickets_quantity, ticket_price)
+VALUES ('Batman', 'Tim Burton', 'The Batman is a 2022 American superhero film based on the DC Comics character', 250, 1.99);
 
 INSERT INTO movie(name, director, description, tickets_quantity, ticket_price)
 VALUES ('The Matrix Resurrections', 'Lana Wachowski',

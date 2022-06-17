@@ -12,6 +12,7 @@ import com.itechart.demojavakotlin.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -36,8 +37,8 @@ public class MovieServiceImpl implements MovieService {
     @Transactional
     //todo #DONE
     public MovieEntity addMovie(final MovieRequest requestMovie) {
-        if (requestMovie.getName().isEmpty() || requestMovie.getDirector().isEmpty()) {
-            throw new InvalidInputDataException("Empty name or director fields");
+        if (ObjectUtils.isEmpty(requestMovie.getName()) || ObjectUtils.isEmpty(requestMovie.getDirector())) {
+            throw new InvalidInputDataException("Name or director fields are empty/null");
         }
         return movieRepository.saveAndFlush(
                 MovieEntity.builder()
