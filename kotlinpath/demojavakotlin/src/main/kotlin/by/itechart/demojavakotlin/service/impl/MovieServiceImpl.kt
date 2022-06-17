@@ -20,17 +20,10 @@ class MovieServiceImpl(private val movieRepository: MovieRepository) : MovieServ
 
     @Transactional
     override fun addMovie(requestMovie: MovieRequest): MovieEntity {
-        return if (requestMovie.name.isEmpty()) {
-            throw InvalidInputDataException("")
-        } else {
-            movieRepository.saveAndFlush(
-                    MovieEntity(
-                            name = requestMovie.name,
-                            director = requestMovie.director,
-                            description = requestMovie.description
-                    )
-            )
+        if (requestMovie.name.isEmpty() || requestMovie.director.isEmpty()) {
+            throw InvalidInputDataException("Empty name or director fields")
         }
+        return movieRepository.saveAndFlush(requestMovie.toEntity())
     }
 
     @Transactional
@@ -43,9 +36,10 @@ class MovieServiceImpl(private val movieRepository: MovieRepository) : MovieServ
     override fun getMovieByName(movieName: String): MovieEntity {
         return if (movieName.isEmpty()) {
             throw UnprocessableException("Movie name is empty")
-        } else {
-            movieRepository.findByName(movieName) //not necessary exception
-        }
+        } else
+            checkNotNull(movieRepository.findByName(movieName)) {
+                EntityNotFoundException("Movie with name: $movieName if not found")
+            }
     }
 
     @Transactional
@@ -63,5 +57,13 @@ class MovieServiceImpl(private val movieRepository: MovieRepository) : MovieServ
 
     @Transactional
     override fun changeTotalTicketQuantity(quantity: Int, id: UUID, ticketPrice: BigDecimal) =
-            movieRepository.changeTotalTicketsQuantity(quantity, id, ticketPrice)
+        movieRepository.changeTotalTicketsQuantity(quantity, id, ticketPrice)
+
+    private fun MovieRequest.toEntity() =
+        MovieEntity(
+            name = this.name,
+            director = this.director,
+            description = this.description
+        )
+
 }

@@ -24,10 +24,10 @@ class TicketServiceImpl(
         val buyer = userService.getByName("Homer Simpson")
         val foundTickets = ticketRepository.findByUserId(buyer)
         val purchasedTickets = foundTickets
-                .stream()
-                .map { quantity }
-                .mapToInt(Int::toInt)
-                .sum()
+            .stream()
+            .map { quantity }
+            .mapToInt(Int::toInt)
+            .sum()
 
         val discount = if (purchasedTickets < 10) BigDecimal(1) else BigDecimal(0.9)
         val finalPrice = BigDecimal(quantity).multiply(foundMovie.ticketPrice).multiply(discount)
@@ -37,12 +37,14 @@ class TicketServiceImpl(
         val updatedTickets = foundMovie.ticketsQuantity - quantity
         movieService.changeTotalTicketQuantity(updatedTickets, foundMovie.id, foundMovie.ticketPrice)
 
-        return ticketRepository.saveAndFlush(TicketEntity(
+        return ticketRepository.saveAndFlush(
+            TicketEntity(
                 price = finalPrice,
                 quantity = quantity,
                 userId = buyer,
                 movieId = foundMovie
-        ))
+            )
+        )
     }
 
     private fun getMovieByName(movieName: String): MovieEntity = movieService.getMovieByName(movieName)

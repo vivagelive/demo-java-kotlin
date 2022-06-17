@@ -24,7 +24,7 @@ class UserServiceImpl(private val userRepository: UserRepository) : UserService 
     @Transactional
     override fun createUser(userRequest: UserRequest): UserEntity {
         return if (userRequest.name.isEmpty())
-            throw UnprocessableException("Username is null")
+            throw UnprocessableException("Username is empty")
         else userRepository.saveAndFlush(
             UserEntity(
                 name = userRequest.name,

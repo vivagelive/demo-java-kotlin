@@ -11,7 +11,7 @@ import java.util.*
 
 @Repository
 interface MovieRepository : JpaRepository<MovieEntity, UUID> {
-    fun findByName(movieName: String?): MovieEntity
+    fun findByName(movieName: String?): MovieEntity?
 
     @Modifying
     @Query(value = "UPDATE movie SET tickets_quantity = :quantity, ticket_price = :ticketPrice WHERE id = :id", nativeQuery = true)
