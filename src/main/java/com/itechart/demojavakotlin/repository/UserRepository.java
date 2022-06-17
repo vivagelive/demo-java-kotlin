@@ -22,4 +22,7 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
     @Modifying
     @Query(value = "UPDATE users SET money = money - :bill WHERE id = :id", nativeQuery = true)
     void payTicket(@Param("id") final UUID id, @Param("bill") final BigDecimal bill);
+
+    @Query(value = "SELECT EXISTS(SELECT * FROM users WHERE id = :id AND money IS NOT NULL)",nativeQuery = true)
+    boolean checkUsersMoneyNotNull(@Param("id") final UUID id);
 }

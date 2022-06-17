@@ -23,9 +23,12 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void payTicket(final UUID id, final BigDecimal bill) {
         //todo #DONE 1. check money
+        if (!userRepository.checkUsersMoneyNotNull(id)){
+            throw new UnprocessableException("User don`t have money");
+        }
         final BigDecimal usersMoney = userRepository.getUsersMoney(id);
         if (usersMoney.compareTo(bill) < 0) {
-            throw new UnprocessableException("User dont have enough money");
+            throw new UnprocessableException("User don`t have enough money");
         }
         //todo #DONE 2. gimme your money
         userRepository.payTicket(id, bill);
