@@ -32,7 +32,8 @@ INSERT INTO users (money, name)
 VALUES (300, 'Homer Simpson');
 
 INSERT INTO movie (name, director, description, tickets_quantity, ticket_price)
-VALUES ('Batman', 'Tim Burton', 'The Batman is a 2022 American superhero film based on the DC Comics character', 250, 1.99);
+VALUES ('Batman', 'Tim Burton', 'The Batman is a 2022 American superhero film based on the DC Comics character', 250,
+        1.99);
 
 INSERT INTO movie(name, director, description, tickets_quantity, ticket_price)
 VALUES ('The Matrix Resurrections', 'Lana Wachowski',
@@ -44,4 +45,5 @@ INSERT INTO ticket (price, quantity, movie_id, user_id)
 VALUES (1.99, 1, (SELECT id FROM movie WHERE name = 'Batman'), (SELECT id FROM users WHERE name = 'Homer Simpson'));
 
 INSERT INTO ticket (price, quantity, movie_id, user_id)
-VALUES (1.99, 1, (SELECT id FROM movie WHERE name = 'The Matrix Resurrections'), (SELECT id FROM users WHERE name = 'Homer Simpson'));
+VALUES (1.99, 1, (SELECT id FROM movie WHERE name = 'The Matrix Resurrections'),
+        (SELECT id FROM users WHERE name = 'Homer Simpson'));
