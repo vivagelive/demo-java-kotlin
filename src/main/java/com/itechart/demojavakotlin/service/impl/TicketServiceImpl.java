@@ -52,6 +52,8 @@ public class TicketServiceImpl implements TicketService {
         final int updatedTickets = foundMovie.getTicketsQuantity() - quantity;
         movieService.changeTotalTicketQuantity(updatedTickets, foundMovie.getId(), foundMovie.getTicketPrice());
 
+        PaymentInformationService.getInstance().createBill(buyer.getName(), movieName, quantity, finalPrice);
+
         return ticketRepository.saveAndFlush(
                 TicketEntity.builder()
                         .price(finalPrice)
