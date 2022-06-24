@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static com.itechart.demojavakotlin.utils.Utils.HOMER_SIMPSON;
 import static java.lang.String.format;
 import static java.math.BigDecimal.valueOf;
 
@@ -35,7 +36,7 @@ public class TicketServiceImpl implements TicketService {
             throw new UnprocessableException(format("Requested tickets number greater than %d", foundMovie.getTicketsQuantity()));
         }
         //todo 2. sale
-        UserEntity buyer = userService.getByName("Homer Simpson");      //mock user from db //todo auth
+        UserEntity buyer = userService.getByName(HOMER_SIMPSON);      //mock user from db //todo auth
 
         final List<TicketEntity> foundTickets = ticketRepository.findByUserId(buyer);
 
