@@ -6,10 +6,11 @@ import lombok.Setter;
 import java.io.*;
 import java.math.BigDecimal;
 
+import static com.itechart.demojavakotlin.utils.Utils.LINE;
+
 @Getter
 @Setter
 public class PaymentInformationService {
-    private static final String LINE = "-------------------------------------------------------";
 
     private static PaymentInformationService INSTANCE = new PaymentInformationService();
 
