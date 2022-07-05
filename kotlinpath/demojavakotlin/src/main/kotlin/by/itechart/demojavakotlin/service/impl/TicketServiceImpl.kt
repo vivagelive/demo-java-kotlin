@@ -10,6 +10,7 @@ import by.itechart.demojavakotlin.service.UserService
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
+const val HOMER_SIMPSON = "HOMER_SIMPSON"
 @Service
 class TicketServiceImpl(
         private val ticketRepository: TicketRepository,
@@ -21,7 +22,7 @@ class TicketServiceImpl(
         check(foundMovie.ticketsQuantity < quantity) {
             UnprocessableException("Requested ticket number is greater than ${foundMovie.ticketsQuantity}")
         }
-        val buyer = userService.getByName("Homer Simpson")
+        val buyer = userService.getByName(HOMER_SIMPSON)
         val foundTickets = ticketRepository.findByUserId(buyer)
         val purchasedTickets = foundTickets
             .stream()
@@ -36,6 +37,8 @@ class TicketServiceImpl(
 
         val updatedTickets = foundMovie.ticketsQuantity - quantity
         movieService.changeTotalTicketQuantity(updatedTickets, foundMovie.id, foundMovie.ticketPrice)
+
+        PaymentInformationService.createBill(buyer.name, movieName, quantity, finalPrice)
 
         return ticketRepository.saveAndFlush(
             TicketEntity(

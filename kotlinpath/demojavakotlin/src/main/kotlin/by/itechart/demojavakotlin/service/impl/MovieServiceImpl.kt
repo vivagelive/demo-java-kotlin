@@ -44,8 +44,9 @@ class MovieServiceImpl(private val movieRepository: MovieRepository) : MovieServ
 
     @Transactional
     override fun addTicketsToMovie(ticketRequest: TicketRequest) {
-        val foundMovie = getMovieByName(ticketRequest.movieName)
-        val totalQuantityToUpdate = foundMovie.ticketsQuantity + ticketRequest.quantity
+        val (_, quantity, _, movieName) = ticketRequest
+        val foundMovie = getMovieByName(movieName)
+        val totalQuantityToUpdate = foundMovie.ticketsQuantity + quantity
         changeTotalTicketQuantity(totalQuantityToUpdate, foundMovie.id, foundMovie.ticketPrice)
     }
 

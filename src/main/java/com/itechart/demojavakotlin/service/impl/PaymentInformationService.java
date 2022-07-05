@@ -3,15 +3,15 @@ package com.itechart.demojavakotlin.service.impl;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
-
-import static com.itechart.demojavakotlin.utils.Utils.LINE;
 
 @Getter
 @Setter
 public class PaymentInformationService {
-
+    private static final String LINE = "-------------------------------------------------------";
     private static PaymentInformationService INSTANCE = new PaymentInformationService();
 
     private PaymentInformationService() {
@@ -29,8 +29,7 @@ public class PaymentInformationService {
 
         final File paymentInformation = new File("src/main/resources/templates/bill.txt");
 
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(paymentInformation);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(paymentInformation)) {
             fileOutputStream.write(bill.getBytes());
         } catch (IOException e) {
             e.printStackTrace();

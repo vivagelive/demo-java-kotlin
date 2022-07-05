@@ -2,6 +2,7 @@ package com.itechart.demojavakotlin.service.impl;
 
 import com.itechart.demojavakotlin.entity.UserEntity;
 import com.itechart.demojavakotlin.exceptions.EntityNotFoundException;
+import com.itechart.demojavakotlin.exceptions.NoMoneyNoHoneyException;
 import com.itechart.demojavakotlin.exceptions.UnprocessableException;
 import com.itechart.demojavakotlin.model.UserRequest;
 import com.itechart.demojavakotlin.repository.UserRepository;
@@ -21,10 +22,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void payTicket(final UUID id, final BigDecimal bill) {
+    public void payTicket(final UUID id, final BigDecimal bill) throws NoMoneyNoHoneyException {
         //todo #DONE 1. check money
-        if (!userRepository.checkUsersMoneyNotNull(id)){
-            throw new UnprocessableException("User don`t have money");
+        if (!userRepository.checkUsersMoneyNotNull(id)) {
+            throw new NoMoneyNoHoneyException("User don`t have money at all");
         }
         final BigDecimal usersMoney = userRepository.getUsersMoney(id);
         if (usersMoney.compareTo(bill) < 0) {

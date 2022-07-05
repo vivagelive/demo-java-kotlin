@@ -3,6 +3,7 @@ package com.itechart.demojavakotlin.service.impl;
 import com.itechart.demojavakotlin.entity.MovieEntity;
 import com.itechart.demojavakotlin.entity.TicketEntity;
 import com.itechart.demojavakotlin.entity.UserEntity;
+import com.itechart.demojavakotlin.exceptions.NoMoneyNoHoneyException;
 import com.itechart.demojavakotlin.exceptions.UnprocessableException;
 import com.itechart.demojavakotlin.repository.TicketRepository;
 import com.itechart.demojavakotlin.service.MovieService;
@@ -15,14 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static com.itechart.demojavakotlin.utils.Utils.HOMER_SIMPSON;
 import static java.lang.String.format;
 import static java.math.BigDecimal.valueOf;
 
 @Service
 @RequiredArgsConstructor
 public class TicketServiceImpl implements TicketService {
-
+    private static final String HOMER_SIMPSON = "Homer Simpson";
     private final UserService userService;
     private final MovieService movieService;
     private final TicketRepository ticketRepository;
@@ -47,7 +47,11 @@ public class TicketServiceImpl implements TicketService {
         final BigDecimal finalPrice = valueOf(quantity).multiply(foundMovie.getTicketPrice().multiply(discount));
 
         //todo #DONE 3. change users money
-        userService.payTicket(buyer.getId(), finalPrice);
+        try {
+            userService.payTicket(buyer.getId(), finalPrice);
+        } catch (NoMoneyNoHoneyException e) {
+            System.out.println("Find a job to buy this ticket");
+        }
 
         //todo #DONE 4. change total tickets quantity
         final int updatedTickets = foundMovie.getTicketsQuantity() - quantity;
