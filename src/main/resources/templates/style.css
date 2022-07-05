@@ -1,0 +1,21 @@
+.myList {
+    font-size: 25px;
+    color: white;
+    text-align: left;
+    align-content: flex-start;
+}
+
+.icon {
+    margin: auto !important;
+    width: 50px;
+    height: 50px;
+    background: none !important;
+    border: none !important;
+}
+
+.demoBlock {
+    margin-right: 8px;
+    padding-right: 5px;
+    border: 3px solid;
+    border-radius: 10px;
+}
