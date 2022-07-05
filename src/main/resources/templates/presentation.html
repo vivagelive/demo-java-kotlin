@@ -57,38 +57,40 @@
 <body>
 
 <div class="reveal">
-
     <div class="slides">
 
         <section>
             <title>Slide#1</title>
-            <h1>Java Vs Kotlin</h1>
-            <p>Kotlin for Java developers.</p>
+            <h2>Kotlin for Java developers</h2>
+            <p>Created by Karen Bagratyan and Radyon Stashynski</p>
+            <div class="developers">
+                <img src="Karen.Bagratyan.png" class="photo" alt="">
+                <img src="Radyon.Stashynski.png" class="photo" alt="">
+            </div>
         </section>
 
         <section>
             <title>Slide#2</title>
-            <p>What’s gonna happen at this presentation</p>
+            <p>О чём мы сегодня не расскажем</p>
             <div class="col">
-                <ol class="myList">
-                    <li>Объявление класса + поля (вал вар)</li>
-                    <li>Возвращаемый тип (обязательность или нет)</li>
-                    <li>Функции + functional etc…</li>
-                    <li>Циклы + условные операторы и условные выражения</li>
-                    <li>Тернарные операции</li>
-                    <li>Тип Unit and Nothing</li>
-                    <li>Именованные аргументы !</li>
-                    <li>Наименование функции с обратными кавычками</li>
-                    <li>Compaion object</li>
-                    <li>Function extensions</li>
+                <ol class="list-item">
+                    <li class="fragment">Сегодняшний meetup - не документация.</li>
+                    <li class="fragment">Не будет подробного пояснения байт-кода</li>
+                    <li class="fragment">Фреймворки специфичные только для kotlin</li>
+                    <li class="fragment">Android</li>
                 </ol>
             </div>
         </section>
 
         <section>
             <title>Slide#3 theory</title>
-            <div>
-
+            <p>О чём мы будем говорить</p>
+            <div class="col">
+                <ol class="list-item">
+                    <li class="fragment">Основы языка kotlin</li>
+                    <li class="fragment">Часть стандартной библиотеки языка kotlin</li>
+                    <li class="fragment">Пример реализации rest-api с использованием spring boot</li>
+                </ol>
             </div>
         </section>
 
@@ -96,35 +98,25 @@
             <title>Slide #3 content</title>
             <p>Description to slide #1</p>
             <div class="container">
-                <div class="col demoBlock">
+                <div class="col code-block-border">
                     <img class="icon" src="java-seeklogo.com.svg">
-                    <pre><code class="hljs language-java">import java.jdbc.*;
-public class Foo extends Bar {
-  private String a;
-  private final int X = 42;
-
-  public String toString() {
-    // implement this method
+                    <pre><code class="hljs language-java">
+public class Main {
+public static void main (String[] args) {
+    System.out.println("Hello World!")
   }
-
-  // more stuff here
 }
-</code></pre>
+                        </code>
+                    </pre>
                 </div>
-                <div class="col demoBlock">
+                <div class="col code-block-border">
                     <img class="icon" src="Kotlin_(programming_language)-Logo.wine.svg">
-                    <pre><code class="hljs language-java">import java.jdbc.*;
-public class Foo extends Bar {
-  private String a;
-  private final int X = 42;
-
-  public String toString() {
-    // implement this method
-  }
-
-  // more stuff here
+                    <pre><code class="hljs language-kotlin">
+fun main() {
+    println("Hello World")
 }
-</code></pre>
+                        </code>
+                    </pre>
                 </div>
             </div>
         </section>

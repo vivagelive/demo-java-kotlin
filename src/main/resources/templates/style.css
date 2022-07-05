@@ -1,8 +1,19 @@
-.myList {
+.developers {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.list-item {
     font-size: 25px;
     color: white;
     text-align: left;
     align-content: flex-start;
+}
+
+.photo {
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
 }
 
 .icon {
@@ -13,7 +24,7 @@
     border: none !important;
 }
 
-.demoBlock {
+.code-block-border {
     margin-right: 8px;
     padding-right: 5px;
     border: 3px solid;
